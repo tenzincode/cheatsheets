@@ -1,4 +1,6 @@
-There are 3 basic types in TypeScript
+# TypeScript
+
+## Basic Types
 
 ```typescript
 let isDone: boolean = false;
