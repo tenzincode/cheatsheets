@@ -1,8 +1,12 @@
-// There are 3 basic types in TypeScript
+There are 3 basic types in TypeScript
+
+```
 let isDone: boolean = false;
 let lines: number = 42;
 let name: string = "Anders";
+```
 
+```
 // But you can omit the type annotation if the variables are derived
 // from explicit literals
 let isDone = false;
@@ -269,3 +273,4 @@ interface Foo {
 let foo = {} as Foo; // Type assertion here
 foo.bar = 123;
 foo.baz = 'hello world'
+```
