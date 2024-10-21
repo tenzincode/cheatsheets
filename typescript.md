@@ -1,12 +1,12 @@
 There are 3 basic types in TypeScript
 
-```
+```typescript
 let isDone: boolean = false;
 let lines: number = 42;
 let name: string = "Anders";
 ```
 
-```
+```typescript
 // But you can omit the type annotation if the variables are derived
 // from explicit literals
 let isDone = false;
