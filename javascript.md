@@ -51,6 +51,8 @@ arr.slice(start, end) // return shallow copy from index start up to end (does no
 
 arr.splice(start, deleteCount, item1, etc) // remove deleteCount elements from index start and insert item1, etc
 // return array of removed elements
+
+arr.join(separator) // return string with array elements separated by separator or comma
 ```
 
 ### Instance Properties
@@ -61,22 +63,39 @@ arr.length // number of elements in array
 
 ## String
 
-### Static Methods
-
-```javascript
-
-```
-
 ### Instance Methods
 
 ```javascript
-String.
+const str = 'string';
+
+str.charAt(index) // return string character at index
+
+str.concat(str1, etc) // return string joined together
+
+str.includes(searchString, fromIndex) // return true if str contains searchString (case-sensitive)
+
+str.indexOf(searchString, fromIndex) // return index of the first occurrence of searchString
+
+str.split(separator, limit) // return array of substrings split by separator up to limit substrings
+
+str.substring(start, end) // return characters between start and end indeces
+
+str.toLowerCase() // return string converted to lowercase
+
+str.toUpperCase() // return string converted to uppercase
+
+str.trim() // return string with whitespace removed from both sides
+
+str.replace(pattern, replacement) // return string with pattern (string or regex) replaced by replacement
+// replacement is string (replace first occurence only) or function (run on every match)
+
+str.replaceAll(pattern, replacement) // return string with all mathces of pattern replaced by replacement
 ```
 
 ### Instance Properties
 
 ```javascript
-
+String.length // number of characters in string, including spaces
 ```
 
 ## Object
