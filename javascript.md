@@ -1,5 +1,36 @@
 # JavaScript
 
+## Object
+
+### Static Methods
+
+```javascript
+const obj = {};
+
+Object.keys(obj) // return array of strings of object's enumerable string-keyed property names
+
+Object.getOwnPropertyNames() // return array of all of object's properties (except Symbols)
+
+Object.values(obj) // returns array of object's enumerable string-keyed property values
+
+Object.entries(obj) // returns array of object's enumerable string-keyed property key-value pairs
+
+Object.assign(target, source1, source2, etc) // return copy of all enumerable own properties from one or more source objects to a target object
+
+Object.hasOwn(obj, 'property') // return true if object has property
+
+```
+
+### Instance Methods
+
+```javascript
+const obj = {};
+
+obj.hasOwnProperty('property') // prefer Object.hasOwn() for inheritance safety
+
+obj.toString() // return string representing the object
+```
+
 ## Array
 
 ### Static Methods
@@ -96,26 +127,6 @@ str.replaceAll(pattern, replacement) // return string with all mathces of patter
 
 ```javascript
 String.length // number of characters in string, including spaces
-```
-
-## Object
-
-### Static Methods
-
-```javascript
-
-```
-
-### Instance Methods
-
-```javascript
-
-```
-
-### Instance Properties
-
-```javascript
-
 ```
 
 ## Map
