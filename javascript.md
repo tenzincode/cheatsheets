@@ -1,5 +1,27 @@
 # JavaScript
 
+## General Methods
+
+```javascript
+setTimeout(fn, delay) // Execute fn after delay ms; return timerId
+
+setInterval(fn, delay) // Execute fn at specified intervals; return intervalId
+
+clearTimeout(timerId) // Cancels a timeout set by setTimeout().
+
+clearInterval(intervalId) // Cancels a timer set by setInterval().
+
+parseInt(string) // Converts a string to an integer.
+
+parseFloat(string) // Converts a string to a floating-point number.
+
+JSON.parse(jsonString, reviver(key, value, context)) // Converts jsonString into an object
+// reviver() is run on parsed value before returning
+
+JSON.stringify(value, replacer, space) // Converts an object to a JSON string
+// replacer is function or array that replaces values; space is string or number to insert white space
+```
+
 ## Object
 
 ### Static Methods
@@ -147,4 +169,38 @@ String.length // number of characters in string, including spaces
 
 ```javascript
 
+```
+
+## Promise
+
+States: `pending`, `fulfilled`, `rejected`
+
+```javascript
+const promise1 = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('foo');
+	}, 300);
+});
+```
+
+### Static Methods
+
+```javascript
+Promise.all(promises) // returns promise when all promises fulfilled, with an array of fulfillment values
+
+Promise.race(promises) // returns promise with eventual state of first promise that settles
+
+Promise.reject(reason) // shorthand for `new Promise((resolve, reject) => reject(reason))`
+
+Promise.resolve(value) // shorthand for `new Promise((resolve) => resolve(value))`
+```
+
+### Instance Methods
+
+```javascript
+promise1
+	.then(handleFulfilledA)
+	.then(handleFulfilledB)
+	.catch(handleError)
+	.finally(handleEnd);
 ```

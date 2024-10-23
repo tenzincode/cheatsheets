@@ -242,3 +242,39 @@ function FocusInput() {
 
 export default FocusInput;
 ```
+
+## Styled Components
+
+Use template literals to define CSS styles for components:
+
+```jsx
+import React from 'react';
+import styled from 'styled-components';
+
+// Define a styled button component
+const StyledButton = styled.button`
+  background-color: ${(props) => (props.primary ? '#007bff' : '#ccc')};
+  color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => (props.primary ? '#0056b3' : '#999')};
+  }
+`;
+
+const App = () => {
+  return (
+    <div>
+      <StyledButton primary>Primary Button</StyledButton>
+      <StyledButton>Secondary Button</StyledButton>
+    </div>
+  );
+};
+
+export default App;
+
+```
