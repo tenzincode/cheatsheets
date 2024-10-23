@@ -24,6 +24,15 @@ JSON.stringify(value, replacer, space) // Converts an object to a JSON string
 
 ## Object
 
+Use an `Object` for:
+
+- better performance on small datasets
+- simple key-value pairs (strings/symbols)
+- prototypal inheritance
+- JSON support (`JSON.stringify` and `JSON.parse`)
+- less complexity
+- iteration: `for...in` or `Object.keys()`
+
 ### Static Methods
 
 ```javascript
@@ -53,7 +62,54 @@ obj.hasOwnProperty('property') // prefer Object.hasOwn() for inheritance safety
 obj.toString() // return string representing the object
 ```
 
+## Map
+
+Use a `map` for:
+
+- insertion order preservation
+- non-string keys
+- frequent insertion/deletion
+- map methods: `set()`, `get()`,  `delete()`, `has()`, `size`
+- iteration: `forEach()` or `for...of`
+
+### Static Methods
+
+```javascript
+
+```
+
+### Instance Methods
+
+```javascript
+const map = new Map()
+
+map.set(key, value) // adds/updates an entry with a specified key and value; return Map object
+
+map.get(key) // return element associated with key
+
+map.has(key) // return boolean if element in key exists
+
+map.delete(key) // return boolean if element exists and is removed
+
+map.clear() // remove all elements from map; return undefined
+```
+
+### Instance Properties
+
+```javascript
+map.size // return number of elements in map
+```
+
 ## Array
+
+Use an `Array` for:
+
+- order matters
+- numerical index-based access
+- iteration over elements
+- duplicates allowed
+- array methods: `map()`, `filter()`, `reduce()`, `push()`, `pop()`
+- iteration: `forEach()`, `for...of`, `for`, `map()` (for transformation)
 
 ### Static Methods
 
@@ -149,26 +205,6 @@ str.replaceAll(pattern, replacement) // return string with all mathces of patter
 
 ```javascript
 String.length // number of characters in string, including spaces
-```
-
-## Map
-
-### Static Methods
-
-```javascript
-
-```
-
-### Instance Methods
-
-```javascript
-
-```
-
-### Instance Properties
-
-```javascript
-
 ```
 
 ## Promise
