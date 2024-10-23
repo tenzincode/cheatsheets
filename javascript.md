@@ -8,7 +8,7 @@
 - [Array](#array)
 - [String](#string)
 - [Promise](#promise)
-- [Async/Await](#asyncawait)
+- [Fetch/Async/Await](#asyncawait)
 
 ## General
 
@@ -251,7 +251,7 @@ promise1
 	.finally(handleEnd);
 ```
 
-## Async/Await
+## Fetch/Async/Await
 
 `async`: declares a function that returns a promise, allowing the use of `await` inside it
 
@@ -259,35 +259,36 @@ promise1
 
 ```javascript
 // Simulating an API request with delay using a Promise
-function fetchData(isSuccess) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (isSuccess) {
-        resolve("Data fetched successfully!");
-      } else {
-        reject("Error fetching data!");
+// Function to fetch data from a given URL
+function fetchData(url) {
+  return fetch(url) // Return the promise from fetch
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok"); // Handle HTTP errors
       }
-    }, 1000); // Simulates 1 second delay
-  });
+      return response.json(); // Parse JSON if the response is okay
+    });
 }
 
 // Async function using await and try...catch for error handling
-async function getData() {
+async function getData(url) {
   try {
-    // Await pauses execution until the promise resolves
-    const result = await fetchData(true);  // Pass `false` to simulate an error
-    console.log(result); // Logs: "Data fetched successfully!"
+    const result = await fetchData(url); // Await fetchData promise
+    console.log("Data fetched successfully:", result); // Logs the fetched data
 
     // Optional: you can await another promise or do something else after the first one
-    const moreData = await fetchData(true); // Simulate another success
-    console.log(moreData); // Logs: "Data fetched successfully!"
+    const moreData = await fetchData(url); // Fetch data again for demonstration
+    console.log("More data fetched successfully:", moreData); // Logs the fetched data
 
   } catch (error) {
     // Handles rejected promises (i.e., errors)
-    console.error("Error:", error); // Logs: "Error fetching data!"
+    console.error("Error fetching data:", error); // Logs error message
   }
 }
 
+// Example URL to fetch data from
+const url = "https://jsonplaceholder.typicode.com/posts";
+
 // Calling the async function
-getData();
+getData(url);
 ```
