@@ -204,3 +204,44 @@ promise1
 	.catch(handleError)
 	.finally(handleEnd);
 ```
+
+## Async/Await
+
+`async`: declares a function that returns a promise, allowing the use of `await` inside it
+
+`await`: pauses execution until a promise resolves; return resolve result or throw reject error
+
+```javascript
+// Simulating an API request with delay using a Promise
+function fetchData(isSuccess) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isSuccess) {
+        resolve("Data fetched successfully!");
+      } else {
+        reject("Error fetching data!");
+      }
+    }, 1000); // Simulates 1 second delay
+  });
+}
+
+// Async function using await and try...catch for error handling
+async function getData() {
+  try {
+    // Await pauses execution until the promise resolves
+    const result = await fetchData(true);  // Pass `false` to simulate an error
+    console.log(result); // Logs: "Data fetched successfully!"
+
+    // Optional: you can await another promise or do something else after the first one
+    const moreData = await fetchData(true); // Simulate another success
+    console.log(moreData); // Logs: "Data fetched successfully!"
+
+  } catch (error) {
+    // Handles rejected promises (i.e., errors)
+    console.error("Error:", error); // Logs: "Error fetching data!"
+  }
+}
+
+// Calling the async function
+getData();
+```
