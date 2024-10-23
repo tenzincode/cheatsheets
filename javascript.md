@@ -1,6 +1,16 @@
 # JavaScript
 
-## General Methods
+## Table of Contents
+
+- [General](#general)
+- [Object](#object)
+- [Map](#map)
+- [Array](#array)
+- [String](#string)
+- [Promise](#promise)
+- [Async/Await](#asyncawait)
+
+## General
 
 ```javascript
 setTimeout(fn, delay) // Execute fn after delay ms; return timerId
