@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+-
 - [General](#general)
 - [Object](#object)
 - [Map](#map)
@@ -9,6 +10,56 @@
 - [String](#string)
 - [Promise](#promise)
 - [Fetch/Async/Await](#asyncawait)
+
+## Object Notation
+
+### Object Literal
+
+```javascript
+const person = {
+    name: 'Denzel',
+    age: 50,
+    greet: function() {
+        return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    }
+};
+
+console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
+```
+
+## Prototype Pattern
+
+```javascript
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+Person.prototype.greet = function() {
+    return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+};
+
+const person = new Person('Denzel', 50);
+console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
+```
+
+### Class Syntax
+
+```javascript
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    greet() {
+        return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    }
+}
+
+const person = new Person('Denzel', 50);
+console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
+```
 
 ## General
 
