@@ -2,14 +2,14 @@
 
 ## Table of Contents
 
--
+- [Object Notation](#objectnotation)
 - [General](#general)
 - [Object](#object)
 - [Map](#map)
 - [Array](#array)
 - [String](#string)
 - [Promise](#promise)
-- [Fetch/Async/Await](#asyncawait)
+- [Fetch/Async/Await](#fetchasyncawait)
 
 ## Object Notation
 
