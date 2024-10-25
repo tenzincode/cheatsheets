@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [Object Notation](#objectnotation)
+- [Object Notation](#object-notation)
 - [General](#general)
 - [Object](#object)
 - [Map](#map)
