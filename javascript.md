@@ -27,7 +27,7 @@ const person = {
 console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
 ```
 
-## Prototype Pattern
+### Prototype Pattern
 
 ```javascript
 function Person(name, age) {
