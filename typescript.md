@@ -1,6 +1,6 @@
 # TypeScript
 
-Basic Types
+Basic Types:
 
 ```typescript
 let isDone: boolean = false;
@@ -8,7 +8,7 @@ let lines: number = 42;
 let name: string = "Anders";
 ```
 
-Omit type annotation if vars are derived from explicit literals
+Omit type annotation if vars are derived from explicit literals:
 
 ```typescript
 let isDone = false;
@@ -16,7 +16,7 @@ let lines = 42;
 let name = "Anders";
 ```
 
-When impossible to know use "Any" type
+When impossible to know use `any` type:
 
 ```typescript
 let notSure: any = 4;
@@ -24,30 +24,31 @@ notSure = "maybe a string instead";
 notSure = false; // now known as boolean
 ```
 
-Use const for constants
+Constants:
 
 ```typescript
 const numLivesForCat = 9;
 numLivesForCat = 1; // Error
 ```
 
-For collections, there are typed arrays and generic arrays
+Collections:
 
 ```typescript
+// Typed Array
 let list: number[] = [1, 2, 3];
-// Alternatively, using the generic array type
+// Generic Array
 let list: Array<number> = [1, 2, 3];
 ```
 
-For enumerations:
+Enumerations:
 
 ```typescript
-enum Color { Red, Green, Blue };
-let c: Color = Color.Green;
-console.log(Color[c]); // "Green"
+enum Day { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday };
+let today: Day = Day.Monday;
+console.log(Day[today]); // "Monday"
 ```
 
-Lastly, "void" is used in the special case of a function returning nothing
+`void` is used in the special case of a function returning nothing:
 
 ```typescript
 function bigHorribleAlert(): void {
@@ -55,29 +56,32 @@ function bigHorribleAlert(): void {
 }
 ```
 
-Functions are first class citizens, support the lambda "fat arrow" syntax and use type inference
+Functions are first class citizens, support the lambda "fat arrow" syntax and use type inference.
 
-The following are equivalent, the same signature will be inferred by the compiler, and same JavaScript will be emitted
+The following are equivalent, the same signature will be inferred by the compiler, and same JavaScript will be emitted:
 
 ```typescript
+// Explicit return type
 let f1 = function (i: number): number { return i * i; }
-// Return type inferred
+// Inferred return type
 let f2 = function (i: number) { return i * i; }
-// "Fat arrow" syntax
+// Lambda with explicit return type
 let f3 = (i: number): number => { return i * i; }
-// "Fat arrow" syntax with return type inferred
+// Lambda with inferred return type
 let f4 = (i: number) => { return i * i; }
-// "Fat arrow" syntax with return type inferred, braceless means no return
-// keyword needed
+// Lambda with inferred return type, braceless means no return keyword needed
 let f5 = (i: number) => i * i;
+```
 
-// Functions can accept more than one type
+Functions can accept more than one type:
+
+```typescript
 function f6(i: string | number): void {
   console.log("The value was " + i);
 }
 ```
 
-Interfaces are structural, anything that has the properties is compliant with the interface
+Interfaces are structural, anything that has the properties is compliant with the interface:
 
 ```typescript
 interface Person {
