@@ -5,7 +5,7 @@ Basic Types:
 ```typescript
 let isDone: boolean = false;
 let lines: number = 42;
-let name: string = "Anders";
+let name: string = "Denzel";
 ```
 
 Omit type annotation if vars are derived from explicit literals:
@@ -13,7 +13,7 @@ Omit type annotation if vars are derived from explicit literals:
 ```typescript
 let isDone = false;
 let lines = 42;
-let name = "Anders";
+let name = "Denzel";
 ```
 
 When impossible to know use `any` type:
@@ -36,6 +36,7 @@ Collections:
 ```typescript
 // Typed Array
 let list: number[] = [1, 2, 3];
+
 // Generic Array
 let list: Array<number> = [1, 2, 3];
 ```
@@ -52,7 +53,7 @@ console.log(Day[today]); // "Monday"
 
 ```typescript
 function bigHorribleAlert(): void {
-  alert("I'm a little annoying box!");
+	alert("I'm a little annoying box!");
 }
 ```
 
@@ -63,12 +64,16 @@ The following are equivalent, the same signature will be inferred by the compile
 ```typescript
 // Explicit return type
 let f1 = function (i: number): number { return i * i; }
+
 // Inferred return type
 let f2 = function (i: number) { return i * i; }
+
 // Lambda with explicit return type
 let f3 = (i: number): number => { return i * i; }
+
 // Lambda with inferred return type
 let f4 = (i: number) => { return i * i; }
+
 // Lambda with inferred return type, braceless means no return keyword needed
 let f5 = (i: number) => i * i;
 ```
@@ -77,69 +82,46 @@ Functions can accept more than one type:
 
 ```typescript
 function f6(i: string | number): void {
-  console.log("The value was " + i);
+	console.log("The value was " + i);
 }
 ```
 
-Interfaces are structural, anything that has the properties is compliant with the interface:
+Interfaces are structural; anything that has the properties is compliant with the interface:
 
 ```typescript
 interface Person {
-  name: string;
-  // Optional properties, marked with a "?"
-  age?: number;
-  // And of course functions
-  move(): void;
+	name: string;
+	// Optional properties, marked with a "?"
+	age?: number;
+	// And of course functions
+	move(): void;
 }
 ```
 
-Object that implements the "Person" interface
-
-Can be treated as a Person since it has the name and move properties
+Object that implements the "Person" interface:
 
 ```typescript
-let p: Person = { name: "Bobby", move: () => { } };
+// Complies with Person interface since it has the name and move properties:
+let p: Person = { name: "Denzel", move: () => { } };
+
 // Objects that have the optional property:
-let validPerson: Person = { name: "Bobby", age: 42, move: () => { } };
+let validPerson: Person = { name: "Denzel", age: 42, move: () => { } };
+
 // Is not a person because age is not a number
-let invalidPerson: Person = { name: "Bobby", age: true };
+let invalidPerson: Person = { name: "Denzel", age: true };
 ```
 
-Interfaces can also describe a function type
+Interfaces can also describe a function type:
 
 ```typescript
 interface SearchFunc {
-  (source: string, subString: string): boolean;
+	(source: string, subString: string): boolean;
 }
-// Only the parameters' types are important, names are not important.
+
+// Only the parameters' types are important; names are not important.
 let mySearch: SearchFunc;
 mySearch = function (src: string, sub: string) {
-  return src.search(sub) != -1;
-}
-```
-
-Classes - members are public by default
-
-```typescript
-class Point {
-  // Properties
-  x: number;
-
-  // Constructor - the public/private keywords in this context will generate
-  // the boiler plate code for the property and the initialization in the
-  // constructor.
-  // In this example, "y" will be defined just like "x" is, but with less code
-  // Default values are also supported
-
-  constructor(x: number, public y: number = 0) {
-    this.x = x;
-  }
-
-  // Functions
-  dist(): number { return Math.sqrt(this.x * this.x + this.y * this.y); }
-
-  // Static members
-  static origin = new Point(0, 0);
+	return src.search(sub) != -1;
 }
 ```
 
@@ -149,8 +131,33 @@ Any missing properties will then cause an error at compile-time.
 
 ```typescript
 class PointPerson implements Person {
-    name: string
-    move() {}
+		name: string
+		move() {}
+}
+```
+
+Classes - members are public by default
+
+```typescript
+class Point {
+	// Properties
+	x: number;
+
+	// Constructor - the public/private keywords in this context will generate
+	// the boiler plate code for the property and the initialization in the
+	// constructor.
+	// In this example, "y" will be defined just like "x" is, but with less code
+	// Default values are also supported
+
+	constructor(x: number, public y: number = 0) {
+		this.x = x;
+	}
+
+	// Functions
+	dist(): number { return Math.sqrt(this.x * this.x + this.y * this.y); }
+
+	// Static members
+	static origin = new Point(0, 0);
 }
 
 let p1 = new Point(10, 20);
@@ -161,15 +168,15 @@ Inheritance
 
 ```typescript
 class Point3D extends Point {
-  constructor(x: number, y: number, public z: number = 0) {
-    super(x, y); // Explicit call to the super class constructor is mandatory
-  }
+	constructor(x: number, y: number, public z: number = 0) {
+		super(x, y); // Explicit call to the super class constructor is mandatory
+	}
 
-  // Overwrite
-  dist(): number {
-    let d = super.dist();
-    return Math.sqrt(d * d + this.z * this.z);
-  }
+	// Overwrite
+	dist(): number {
+		let d = super.dist();
+		return Math.sqrt(d * d + this.z * this.z);
+	}
 }
 ```
 
@@ -177,13 +184,13 @@ Modules, "." can be used as separator for sub modules
 
 ```typescript
 module Geometry {
-  export class Square {
-    constructor(public sideLength: number = 0) {
-    }
-    area() {
-      return Math.pow(this.sideLength, 2);
-    }
-  }
+	export class Square {
+		constructor(public sideLength: number = 0) {
+		}
+		area() {
+			return Math.pow(this.sideLength, 2);
+		}
+	}
 }
 
 let s1 = new Geometry.Square(5);
@@ -203,8 +210,8 @@ Classes
 
 ```typescript
 class Tuple<T1, T2> {
-  constructor(public item1: T1, public item2: T2) {
-  }
+	constructor(public item1: T1, public item2: T2) {
+	}
 }
 ```
 
@@ -212,8 +219,8 @@ Interfaces
 
 ```typescript
 interface Pair<T> {
-  item1: T;
-  item2: T;
+	item1: T;
+	item2: T;
 }
 ```
 
@@ -221,7 +228,7 @@ Functions
 
 ```typescript
 let pairToTuple = function <T>(p: Pair<T>) {
-  return new Tuple(p.item1, p.item2);
+	return new Tuple(p.item1, p.item2);
 };
 
 let tuple = pairToTuple({ item1: "hello", item2: "world" });
@@ -249,8 +256,8 @@ READONLY: New Feature in TypeScript 3.1
 
 ```typescript
 interface Person {
-  readonly name: string;
-  readonly age: number;
+	readonly name: string;
+	readonly age: number;
 }
 
 var p1: Person = { name: "Tyrone", age: 42 };
@@ -262,14 +269,14 @@ p3.age = 35; // Error, p3.age is read-only
 p2.age = 45; // Ok, but also changes p3.age because of aliasing
 
 class Car {
-  readonly make: string;
-  readonly model: string;
-  readonly year = 2018;
+	readonly make: string;
+	readonly model: string;
+	readonly year = 2018;
 
-  constructor() {
-    this.make = "Unknown Make"; // Assignment permitted in constructor
-    this.model = "Unknown Model"; // Assignment permitted in constructor
-  }
+	constructor() {
+		this.make = "Unknown Make"; // Assignment permitted in constructor
+		this.model = "Unknown Model"; // Assignment permitted in constructor
+	}
 }
 
 let numbers: Array<number> = [0, 1, 2, 3, 4];
@@ -284,15 +291,15 @@ Tagged Union Types for modelling state that can be in one of many shapes
 
 ```typescript
 type State =
-  | { type: "loading" }
-  | { type: "success", value: number }
-  | { type: "error", message: string };
+	| { type: "loading" }
+	| { type: "success", value: number }
+	| { type: "error", message: string };
 
 declare const state: State;
 if (state.type === "success") {
-  console.log(state.value);
+	console.log(state.value);
 } else if (state.type === "error") {
-  console.error(state.message);
+	console.error(state.message);
 }
 ```
 
@@ -319,12 +326,12 @@ iterate over the list of values on the object being iterated
 ```typescript
 let arrayOfAnyType = [1, "string", false];
 for (const val of arrayOfAnyType) {
-    console.log(val); // 1, "string", false
+		console.log(val); // 1, "string", false
 }
 
 let list = [4, 5, 6];
 for (const i of list) {
-   console.log(i); // 4, 5, 6
+	 console.log(i); // 4, 5, 6
 }
 ```
 
@@ -334,7 +341,7 @@ iterate over the list of keys on the object being iterated
 
 ```typescript
 for (const i in list) {
-   console.log(i); // 0, 1, 2
+	 console.log(i); // 0, 1, 2
 }
 ```
 
@@ -350,8 +357,8 @@ Because the inferred type of foo is `{}` (an object with 0 properties), you are 
 
 ```typescript
 interface Foo {
-  bar: number;
-  baz: string;
+	bar: number;
+	baz: string;
 }
 
 let foo = {} as Foo; // Type assertion here
