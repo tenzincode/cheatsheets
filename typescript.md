@@ -1,5 +1,22 @@
 # TypeScript
 
+## Table of Contents
+
+- [Basic Types](#basic-types)
+- [Functions](#functions)
+- [Interfaces](#interfaces)
+- [Classes](#classes)
+- [Inheritance](#inheritance)
+- [Modules](#modules)
+- [Generics](#generics)
+- [Definition File](#definition-file)
+- [Template Strings](#template-strings)
+- [Readonly](#readonly)
+- [Tagged Union Types](#tagged-union-types)
+- [Template Literal Types](#template-literal-types)
+- [Iterators and Generators](#iterators-and-generators)
+- [Type Assertion](#type-assertion)
+
 ## Basic Types
 
 ```typescript
