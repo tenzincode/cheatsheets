@@ -1,6 +1,6 @@
 # TypeScript
 
-Basic Types:
+## Basic Types
 
 ```typescript
 let isDone: boolean = false;
@@ -57,9 +57,13 @@ function bigHorribleAlert(): void {
 }
 ```
 
-Functions are first class citizens, support the lambda "fat arrow" syntax and use type inference.
+## Functions
 
-The following are equivalent, the same signature will be inferred by the compiler, and same JavaScript will be emitted:
+- First class citizens
+- Support the lambda "fat arrow" syntax
+- Use type inference
+
+The following are equivalent (ie: the same signature will be inferred by the compiler and same JavaScript will be emitted):
 
 ```typescript
 // Explicit return type
@@ -86,7 +90,10 @@ function f6(i: string | number): void {
 }
 ```
 
-Interfaces are structural; anything that has the properties is compliant with the interface:
+## Interfaces
+
+- Describe structural
+- Anything that has the properties is compliant with the interface
 
 ```typescript
 interface Person {
@@ -136,7 +143,9 @@ class PointPerson implements Person {
 }
 ```
 
-Classes - members are public by default
+## Classes
+
+- Members are public by default
 
 ```typescript
 class Point {
@@ -164,7 +173,7 @@ let p1 = new Point(10, 20);
 let p2 = new Point(25); //y will be 0
 ```
 
-Inheritance
+## Inheritance
 
 ```typescript
 class Point3D extends Point {
@@ -180,14 +189,17 @@ class Point3D extends Point {
 }
 ```
 
-Modules, "." can be used as separator for sub modules
+## Modules
+
+- Sub-modules separated by `.`
+- deprecated for `namespace`
+- `namespace` deprecated for ES6 file-based modules
 
 ```typescript
 module Geometry {
 	export class Square {
-		constructor(public sideLength: number = 0) {
-		}
-		area() {
+		constructor(public sideLength: number = 0) { }
+		area(): number {
 			return Math.pow(this.sideLength, 2);
 		}
 	}
@@ -204,14 +216,13 @@ import G = Geometry;
 let s2 = new G.Square(10);
 ```
 
-Generics
+## Generics
 
 Classes
 
 ```typescript
 class Tuple<T1, T2> {
-	constructor(public item1: T1, public item2: T2) {
-	}
+	constructor(public item1: T1, public item2: T2) { }
 }
 ```
 
@@ -234,25 +245,36 @@ let pairToTuple = function <T>(p: Pair<T>) {
 let tuple = pairToTuple({ item1: "hello", item2: "world" });
 ```
 
-Including references to a definition file:
+## Definition File
+
+- declare types to enable type-checking and intellisense
+- uses same syntax but without implementation
+- use `declare` for global or module-wide declarations
 
 ```typescript
 <reference path="jquery.d.ts" />
 ```
 
-Template Strings (strings that use backticks)
+```typescript
+// lodash.d.ts
+declare module "lodash" {
+  export function chunk<T>(array: T[], size?: number): T[][];
+}
+```
+
+## Template Strings
 
 String Interpolation with Template Strings
 
 ```typescript
-let name = 'Tyrone';
+let name = 'Denzel';
 let greeting = `Hi ${name}, how are you?`
 // Multiline Strings with Template Strings
 let multiline = `This is an example
 of a multiline string`;
 ```
 
-READONLY: New Feature in TypeScript 3.1
+## Readonly
 
 ```typescript
 interface Person {
@@ -260,7 +282,7 @@ interface Person {
 	readonly age: number;
 }
 
-var p1: Person = { name: "Tyrone", age: 42 };
+var p1: Person = { name: "Denzel", age: 42 };
 p1.age = 25; // Error, p1.age is read-only
 
 var p2 = { name: "John", age: 60 };
@@ -287,7 +309,9 @@ moreNumbers.length = 3; // Error, length is read-only
 numbers = moreNumbers; // Error, mutating methods are missing
 ```
 
-Tagged Union Types for modelling state that can be in one of many shapes
+## Tagged Union Types
+
+- for modelling state that can be in one of many shapes
 
 ```typescript
 type State =
@@ -303,7 +327,7 @@ if (state.type === "success") {
 }
 ```
 
-Template Literal Types
+## Template Literal Types
 
 Use to create complex string types
 
@@ -317,9 +341,9 @@ let order2: Order = "A large Espresso";
 let order3: Order = "A small Espresso"; // Error
 ```
 
-Iterators and Generators
+## Iterators and Generators
 
-for..of statement
+### for..of statement
 
 iterate over the list of values on the object being iterated
 
@@ -335,7 +359,7 @@ for (const i of list) {
 }
 ```
 
-for..in statement
+### for..in statement
 
 iterate over the list of keys on the object being iterated
 
@@ -345,7 +369,7 @@ for (const i in list) {
 }
 ```
 
-Type Assertion
+## Type Assertion
 
 ```typescript
 let foo = {} // Creating foo as an empty object
