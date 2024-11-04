@@ -1,5 +1,20 @@
 # Node.js
 
+## Table of Contents
+
+- [The node Command](#the-node-command)
+- [REPL](#repl)
+- [Global Object](#global-object)
+- [Process Object](#process-object)
+- [process.argv](#processargv)
+- [Modules](#modules)
+- [Core Modules](#core-modules)
+- [Listing Node.js Core Modules](#listing-nodejs-core-modules)
+- [The console Module](#the-console-module)
+- [console.log()](#consolelog)
+- [The os Module](#the-os-module)
+- [The util Module](#the-util-module)
+
 ## The node Command
 
 We can execute Node.js programs in the terminal by typing the node command, followed by the name of the file.
@@ -10,7 +25,7 @@ The example command above runs app.js.
 node app.js
 ```
 
-## Node.js REPL
+## REPL
 
 Node.js comes with REPL, an abbreviation for read–eval–print loop. REPL contains three different states:
 
@@ -30,7 +45,7 @@ $ node
 HI
 ```
 
-## Node.js Global Object
+## Global Object
 
 The Node.js environment has a global object that contains every Node-specific global property. The global object can be accessed by either typing in console.log(global) or global in the terminal after RPL is running. In order to see just the keys Object.keys(global) can be used. Since global is an object, new properties can be assigned to it via global.name_of_property = 'value_of_property'.
 
@@ -44,7 +59,7 @@ The Node.js environment has a global object that contains every Node-specific gl
 > global.car = 'delorean'
 ```
 
-## Node.js Process Object
+## Process Object
 
 A process is the instance of a computer program that is being executed. Node has a global process object with useful properties. One of these properties is NODE_ENV which can be used in an if/else statement to perform different tasks depending on if the application is in the production or development phase.
 
@@ -54,7 +69,7 @@ if (process.env.NODE_ENV === 'development'){
 }
 ```
 
-## Node.js process.argv
+## process.argv
 
 process.argv is a property that holds an array of command-line values provided when the current process was initiated. The first element in the array is the absolute path to the Node, followed by the path to the file that’s running and finally any command-line arguments provided when the process was initiated.
 
@@ -72,7 +87,7 @@ process.memoryUsage() is a method that can be used to return information on the 
   external: 8772 }
 ```
 
-## Node.js Modules
+## Modules
 
 In Node.js files are called modules. Modularity is a technique where one program has distinct parts each providing a single piece of the overall functionality - like pieces of a puzzle coming together to complete a picture. require() is a function used to bring one module into another.
 
@@ -80,7 +95,7 @@ In Node.js files are called modules. Modularity is a technique where one program
 const baseball = require('./babeRuth.js')
 ```
 
-## Node.js Core Modules
+## Core Modules
 
 Node has several modules included within the environment to efficiently perform common tasks. These are known as the core modules. The core modules are defined within Node.js’s source and are located in the lib/ folder. A core module can be accessed by passing a string with the name of the module into the require() function.
 
