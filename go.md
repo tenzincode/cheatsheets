@@ -123,3 +123,103 @@ f := float64(i)
 u := uint(i)
 ```
 
+## Flow Control
+
+### Conditional
+
+```go
+if day == "sunday" || day == "saturday" {
+  rest()
+} else if day == "monday" && isTired() {
+  groan()
+} else {
+  work()
+}
+```
+
+### Statements in if
+
+A condition in an `if` statement can be preceded with a statement before a `;`. Variables declared by the statement are only in scope until the end of the `if`.
+
+```go
+if _, err := doThing(); err != nil {
+  fmt.Println("Uh oh")
+}
+```
+
+### Switch
+
+```go
+switch day {
+  case "sunday":
+    // cases don't "fall through" by default!
+    fallthrough
+
+  case "saturday":
+    rest()
+
+  default:
+    work()
+}
+```
+
+### For Loop
+
+```go
+for count := 0; count <= 10; count++ {
+  fmt.Println("My counter is at", count)
+}
+```
+
+### For-Range Loop
+
+```go
+entry := []string{"Jack","John","Jones"}
+for i, val := range entry {
+  fmt.Printf("At position %d, the character %s is present\n", i, val)
+}
+```
+
+### While Loop
+
+```go
+n := 0
+x := 42
+for n != x {
+  n := guess()
+}
+```
+
+## Functions
+
+### Lambdas
+
+Functions are first class objects.
+
+```go
+myfunc := func() bool {
+  return x > 10000
+}
+```
+
+### Multiple Return Types
+
+```go
+a, b := getMessage()
+
+func getMessage() (a string, b string) {
+  return "Hello", "World"
+}
+```
+
+### Named Return Values
+
+By defining the return value names in the signature, a `return` (no args) will return variables with those names.
+
+```go
+func split(sum int) (x, y int) {
+  x = sum * 4 / 9
+  y = sum - x
+  return
+}
+```
