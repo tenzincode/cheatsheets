@@ -1,5 +1,19 @@
 # Go
 
+## Table of Contents
+
+- [Variables](#variables)
+- [Constants](#constants)
+- [Basic Types](#basic-types)
+- [Flow Control](#flow-control)
+- [Functions](#functions)
+- [Packages](#packages)
+- [Concurrency](#concurrency)
+- [Error Control](#error-control)
+- [Structs](#structs)
+- [Methods](#methods)
+- [Interfaces](#interfaces)
+
 ## Variables
 
 ### Declaration
@@ -347,5 +361,162 @@ func doOperation(wg *sync.WaitGroup, item string) {
   defer wg.Done()
   // do operation on item
   // ...
+}
+```
+
+## Error Control
+
+### Defer
+
+Defers running a function until the surrounding function returns.  The arguments are evaluated immediately, but the function call is not run until later.
+
+```go
+func main() {
+  defer fmt.Println("Done")
+  fmt.Println("Working...")
+}
+```
+
+### Deferring Functions
+
+Lambdas are better suited for defer blocks.
+
+```go
+func main() {
+  defer func() {
+    fmt.Println("Done")
+  }()
+  fmt.Println("Working...")
+}
+```
+
+The `defer func` uses current value of `d`, unless we use a pointer to get final value at end of main.
+
+```go
+func main() {
+  var d = int64(0)
+  defer func(d *int64) {
+    fmt.Printf("& %v Unix Sec\n", *d)
+  }(&d)
+  fmt.Print("Done ")
+  d = time.Now().Unix()
+}
+```
+
+## Structs
+
+### Defining
+
+```go
+type Vertex struct {
+  X int
+  Y int
+}
+
+func main() {
+  v := Vertex{1, 2}
+  v.X = 4
+  fmt.Println(v.X, v.Y)
+}
+```
+
+### Literals
+
+You can also put field names.
+
+```go
+v := Vertex{X: 1, Y: 2}
+
+// Field names can be omitted
+v := Vertex{1, 2}
+
+// Y is implicit
+v := Vertex{X: 1}
+```
+
+### Pointers to Structs
+
+Doing `v.X` is the same as doing `(*v).x`, when `v` is a pointer.
+
+```go
+v := &Vertex{1, 2}
+v.X = 2
+```
+
+## Methods
+
+### Receivers
+
+There are no classes, but you can define functions with receivers.
+
+```go
+type Vertex struct {
+  X, Y float64
+}
+
+func (v Vertex) Abs() float64 {
+  return math.Sqrt(v.X * v.X + v.Y * v.Y)
+}
+
+v := Vertex{1, 2}
+v.Abs()
+```
+
+### Mutation
+
+By defining your receiver as a pointer `*Vertex`, you can do mutations.
+
+```go
+func (v *Vertex) Scale(f float64) {
+  v.X = v.X * f
+  v.Y = v.Y * f
+}
+
+v := Vertex{6, 12}
+v.Scale(0.5)
+// `v` is updated
+```
+
+## Interfaces
+
+### Basic Interface
+
+```go
+type Shape interface {
+  Area() float64
+  Perimeter() float64
+}
+```
+
+### Struct
+
+Struct `Rectangle` implicitly implements interface `Shape` by implementing all of its methods.
+
+```go
+type Rectangle struct {
+  Length, Width float64
+}
+```
+
+### Methods
+
+The methods defined in `Shape` are implemented in `Rectangle`
+
+```go
+func (r Rectangle) Area() float64 {
+  return r.Length * r.Width
+}
+
+func (r Rectangle) Perimeter() float64 {
+  return 2 * (r.Length + r.Width)
+}
+```
+
+### Interface Example
+
+```go
+func main() {
+  var r Shape = Rectangle{Length: 3, Width: 4}
+  fmt.Printf("Type of r: %T, Area: %v, Perimeter: %v.", r, r.Area(), r.Perimeter())
 }
 ```
