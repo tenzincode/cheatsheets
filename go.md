@@ -121,10 +121,12 @@ func main () {
   b := *getPointer()
   fmt.Println("Value is", b)
 }
+
 func getPointer () (myPointer *int) {
   a := 234
   return &a
 }
+
 a := new(int)
 *a = 234
 ```
@@ -189,6 +191,7 @@ for count := 0; count <= 10; count++ {
 
 ```go
 entry := []string{"Jack","John","Jones"}
+
 for i, val := range entry {
   fmt.Printf("At position %d, the character %s is present\n", i, val)
 }
@@ -199,6 +202,7 @@ for i, val := range entry {
 ```go
 n := 0
 x := 42
+
 for n != x {
   n := guess()
 }
@@ -258,6 +262,7 @@ import (
 
 ```go
 import r "math/rand"
+
 r.Intn()
 ```
 
@@ -300,6 +305,7 @@ func main() {
   // the order isn't guaranteed!)
   fmt.Println(<-ch, <-ch, <-ch)
 }
+
 func push(name string, ch chan string) {
   msg := "Hey, " + name
   ch <- msg
@@ -352,9 +358,9 @@ func main() {
     wg.Add(1)
     go doOperation(&wg, item)
   }
+
   // Wait for goroutines to finish
   wg.Wait()
-
 }
 
 func doOperation(wg *sync.WaitGroup, item string) {
@@ -386,6 +392,7 @@ func main() {
   defer func() {
     fmt.Println("Done")
   }()
+
   fmt.Println("Working...")
 }
 ```
@@ -395,9 +402,11 @@ The `defer func` uses current value of `d`, unless we use a pointer to get final
 ```go
 func main() {
   var d = int64(0)
+
   defer func(d *int64) {
     fmt.Printf("& %v Unix Sec\n", *d)
   }(&d)
+
   fmt.Print("Done ")
   d = time.Now().Unix()
 }
