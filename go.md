@@ -223,3 +223,129 @@ func split(sum int) (x, y int) {
   return
 }
 ```
+
+## Packages
+
+### Importing
+
+Both of the following are the same:
+
+```go
+import "fmt"
+import "math/rand"
+
+import (
+  "fmt"        // gives fmt.Println
+  "math/rand"  // gives rand.Intn
+)
+```
+
+### Aliases
+
+```go
+import r "math/rand"
+r.Intn()
+```
+
+### Exporting
+
+Exported names begin with capital letters.
+
+```go
+func Hello () {
+  ···
+}
+```
+
+### Packages
+
+Package files begin with `package`
+
+```go
+package hello
+```
+
+## Concurrency
+
+### Goroutines
+
+Channels are concurrency-safe communication objects, used in goroutines.
+
+```go
+func main() {
+  // A "channel"
+  ch := make(chan string)
+
+  // Start concurrent routines
+  go push("Moe", ch)
+  go push("Larry", ch)
+  go push("Curly", ch)
+
+  // Read 3 results
+  // (Since our goroutines are concurrent,
+  // the order isn't guaranteed!)
+  fmt.Println(<-ch, <-ch, <-ch)
+}
+func push(name string, ch chan string) {
+  msg := "Hey, " + name
+  ch <- msg
+}
+```
+
+### Buffered Channels
+
+Buffered channels limit the amount of messages it can keep.
+
+```go
+ch := make(chan int, 2)
+ch <- 1
+ch <- 2
+ch <- 3
+// fatal error:
+// all goroutines are asleep - deadlock!
+```
+
+### Closing Channels
+
+```go
+// Close a channel
+ch <- 1
+ch <- 2
+ch <- 3
+close(ch)
+
+// Iterate across a channel until its closed
+for i := range ch {
+  ···
+}
+
+// Closed if `ok == false`
+v, ok := <- ch
+```
+
+### WaitGroup
+
+A WaitGroup waits for a collection of goroutines to finish.  The main goroutine calls `Add` to set the number of goroutines to wait for.  The goroutine calls `wg.Done()` when it finishes.
+
+```go
+import "sync"
+
+func main() {
+  var wg sync.WaitGroup
+
+  for _, item := range itemList {
+    // Increment WaitGroup Counter
+    wg.Add(1)
+    go doOperation(&wg, item)
+  }
+  // Wait for goroutines to finish
+  wg.Wait()
+
+}
+
+func doOperation(wg *sync.WaitGroup, item string) {
+  defer wg.Done()
+  // do operation on item
+  // ...
+}
+```
