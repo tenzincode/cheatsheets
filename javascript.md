@@ -2,64 +2,16 @@
 
 ## Table of Contents
 
-- [Object Notation](#object-notation)
 - [General](#general)
+- [Object Notation](#object-notation)
+- [Class](#class)
+- [Encapsulation](#encapsulation)
 - [Object](#object)
 - [Map](#map)
 - [Array](#array)
 - [String](#string)
 - [Promise](#promise)
 - [Fetch/Async/Await](#fetchasyncawait)
-
-## Object Notation
-
-### Object Literal
-
-```javascript
-const person = {
-    name: 'Denzel',
-    age: 50,
-    greet: function() {
-        return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
-    }
-};
-
-console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
-```
-
-### Prototype Pattern
-
-```javascript
-function Person(name, age) {
-    this.name = name;
-    this.age = age;
-}
-
-Person.prototype.greet = function() {
-    return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
-};
-
-const person = new Person('Denzel', 50);
-console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
-```
-
-### Class Syntax
-
-```javascript
-class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    greet() {
-        return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
-    }
-}
-
-const person = new Person('Denzel', 50);
-console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
-```
 
 ## General
 
@@ -81,6 +33,163 @@ JSON.parse(jsonString, reviver(key, value, context)) // Converts jsonString into
 
 JSON.stringify(value, replacer, space) // Converts an object to a JSON string
 // replacer is function or array that replaces values; space is string or number to insert white space
+```
+
+## Object Notation
+
+### Object Literal
+
+Good for single instances or configuration objects
+
+```javascript
+const person = {
+    name: 'Denzel',
+    age: 50,
+    greet: function() {
+        return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    }
+};
+
+console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
+```
+
+### Prototype Pattern
+
+Good for memory efficiency with large number of instances
+
+```javascript
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+Person.prototype.greet = function() {
+    return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+};
+
+const person = new Person('Denzel', 50);
+console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
+```
+
+### Factory Function
+
+Useful when creating instances with complex logic and states
+
+```javascript
+function Person(name, age) {
+  return {
+    name,
+    age,
+    greet() {
+      return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    }
+  }
+}
+
+const person = new Person('Denzel, 50);
+console.log(person.greet()); // Output: Hello, my name is Denzel and I am 50 years old.
+```
+
+### Immediately Invoked Function Expressions
+
+```javascript
+const person = (function()  {
+  const name = 'Denzel'
+  const age = 50;
+
+  return {
+    name,
+    age,
+    gree() {
+      return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    }
+  };
+})();
+
+console.log(person.greet()); // Output: Hello, my name is Denzel and I am 50 years old.
+```
+
+## Class
+
+Preferred way to define reusable object structures.
+
+```javascript
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    greet() {
+        return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    }
+}
+
+const person = new Person('Denzel', 50);
+console.log(person.greet());  // Output: Hello, my name is Denzel and I am 50 years old.
+```
+
+### Encapsulation
+
+Private and public methods and properties.
+
+```javascript
+class Person {
+  // Public Properties
+  name;
+  age;
+
+  // Private Properties
+  #sin
+  #address
+
+  constructor(name, age, sin, address) {
+    this.name = name;
+    this.age = age;
+    this.#sin = sin;
+    this.#address = sin;
+  }
+
+  // Public Methods
+  greet() {
+    return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+  }
+
+  getMaskedSIN() {
+    return `***-***-${this.#sin.slice(-3)}`;
+  }
+
+  updateAddress(newAddress) {
+    this.#validateAddress(newAddress) && (this.#address = newAddress);
+  }
+
+  getAddress(sin) {
+    if (this.#validateSIN(sin)) {
+      return this.#address;
+    } else {
+      return null;
+    }
+  }
+
+  // Private Methods
+  #validateSIN(sin) {
+    return sin === this.#sin;
+  }
+
+  #validateAddress(address) {
+    return typeof address === 'string' && address.trim().length > 0;
+  }
+}
+
+const person = new Person('Denzel', 50, '123456789', '123 place street');
+
+console.log(person.getInfo()); // Output: Hello, my name is Denzel and I am 50 years old.
+
+console.log(person.getMaskedSIN()); // Output: ***-***-789
+
+person.updateAddress('456 place street');
+
+console.log(person.getAddress('123456789')); // Output: 456 place street
 ```
 
 ## Object
